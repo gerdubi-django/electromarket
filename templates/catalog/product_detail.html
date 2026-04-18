@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<div class="row">
+  <div class="col-md-6"><img class="img-fluid rounded" src="{{ product.image_url|default:'https://placehold.co/700x500' }}"></div>
+  <div class="col-md-6"><h2>{{ product.name }}</h2><p>{{ product.description }}</p><p>${{ product.price }}</p><p>{% trans "Stock" %}: {{ product.stock }}</p>
+    <form method="post" action="{% url 'cart:add' product.id %}">{% csrf_token %}<input type="number" min="1" max="{{ product.stock }}" name="quantity" value="1" class="form-control mb-2"><button class="btn btn-info" {% if product.stock < 1 %}disabled{% endif %}>{% trans "Add to cart" %}</button></form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<section class="hero mb-4 p-4 rounded-4">
+  <h1 class="display-5 neon-text">{% trans "Modern e-commerce platform" %}</h1>
+  <p>{% trans "Fast, secure, and designed for real-world operations." %}</p>
+</section>
+<div class="row g-4">
+  {% for product in featured_products %}
+  <div class="col-6 col-md-3">
+    <div class="card product-card h-100">
+      <img src="{{ product.image_url|default:'https://placehold.co/600x400' }}" class="card-img-top" alt="{{ product.name }}">
+      <div class="card-body">
+        <h6>{{ product.name }}</h6>
+        <p>${{ product.price }}</p>
+        <a class="btn btn-sm btn-info" href="{{ product.get_absolute_url }}">{% trans "View" %}</a>
+      </div>
+    </div>
+  </div>
+  {% empty %}<p>{% trans "No products yet." %}</p>
+  {% endfor %}
+</div>
+{% endblock %}
