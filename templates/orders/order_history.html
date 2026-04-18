@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}<h2>{% trans "Order history" %}</h2>
+{% for order in orders %}<div class="card mb-3 p-3"><div class="d-flex justify-content-between"><strong>#{{ order.id }}</strong><span>{{ order.get_status_display }}</span></div><small>{{ order.created_at }}</small><ul>{% for item in order.items.all %}<li>{{ item.product_name }} x{{ item.quantity }} - ${{ item.subtotal }}</li>{% endfor %}</ul><p>{% trans "Total" %}: ${{ order.total }}</p>{% if order.status == 'pending' %}<form method="post" action="{% url 'orders:simulate_payment' order.id %}">{% csrf_token %}<button class="btn btn-warning btn-sm">{% trans "Simulate payment" %}</button></form>{% endif %}</div>{% empty %}<p>{% trans "No orders yet." %}</p>{% endfor %}
+{% endblock %}

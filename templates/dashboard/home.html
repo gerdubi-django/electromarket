@@ -1,0 +1,3 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}<h2>{% trans "Admin dashboard" %}</h2><div class="row g-3"><div class="col-md-4"><div class="card p-3"><p>{% trans "Total sales" %}</p><h3>${{ total_sales }}</h3></div></div><div class="col-md-4"><div class="card p-3"><p>{% trans "Orders" %}</p><h3>{{ order_count }}</h3></div></div></div><a href="{% url 'dashboard:products' %}" class="btn btn-info mt-3">{% trans "Manage catalog" %}</a><a href="{% url 'dashboard:orders' %}" class="btn btn-outline-info mt-3">{% trans "Manage orders" %}</a>{% endblock %}

@@ -1,0 +1,9 @@
+:root { --bg:#0f1117; --surface:#181c25; --text:#f5f7ff; --neon:#15d1ff; }
+body { background:var(--bg); color:var(--text); font-family:Inter,system-ui,sans-serif; }
+.glass-nav { background:rgba(24,28,37,.92); backdrop-filter: blur(8px); border-bottom:1px solid rgba(21,209,255,.2); }
+.neon-text { color:var(--neon)!important; text-shadow:0 0 8px rgba(21,209,255,.45); }
+.card,.form-control,.form-select,.table { background:var(--surface)!important; color:var(--text)!important; border:1px solid rgba(21,209,255,.1)!important; }
+.product-card { transition:all .25s ease; }
+.product-card:hover { transform:translateY(-4px); box-shadow:0 8px 22px rgba(21,209,255,.25); }
+.btn-info { background:linear-gradient(135deg,#15d1ff,#2b7cff); border:none; }
+.hero { background:linear-gradient(145deg,#141927,#0e1322); border:1px solid rgba(21,209,255,.2); }
