@@ -12,7 +12,7 @@
   {% include 'partials/navbar.html' %}
   <main class="container main-shell">
     {% for message in messages %}
-      <div class="alert mb-3">{{ message }}</div>
+      <div class="alert alert-{{ message.tags|default:'info' }} mb-3" role="alert">{{ message }}</div>
     {% endfor %}
     {% block content %}{% endblock %}
   </main>
