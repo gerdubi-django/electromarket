@@ -13,7 +13,7 @@ class CartDetailView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        cart, _ = Cart.objects.get_or_create(user=self.request.user)
+        cart, _created_cart = Cart.objects.get_or_create(user=self.request.user)
         context["cart"] = cart
         context["payment_methods"] = PaymentMethod.objects.filter(is_active=True)
         return context
@@ -27,7 +27,7 @@ class AddToCartView(LoginRequiredMixin, View):
         except (TypeError, ValueError):
             quantity = 1
 
-        cart, _ = Cart.objects.get_or_create(user=request.user)
+        cart, _created_cart = Cart.objects.get_or_create(user=request.user)
         item, created = CartItem.objects.get_or_create(cart=cart, product=product)
 
         new_quantity = quantity if created else item.quantity + quantity
