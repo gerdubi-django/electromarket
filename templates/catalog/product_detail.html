@@ -4,7 +4,7 @@
 {% block content %}
 <div class="row g-4">
   <div class="col-12 col-lg-6">
-    <img class="product-img rounded-4 w-100" src="{{ product.image_url|default:'https://placehold.co/800x600?text=ElectroMarket' }}" alt="{{ product.name }}">
+    <img class="product-img product-img--detail rounded-4 w-100" loading="lazy" src="{{ product.image_url|default:'https://placehold.co/800x600?text=ElectroMarket' }}" alt="{{ product.name }}">
   </div>
   <div class="col-12 col-lg-6">
     <div class="card h-100">

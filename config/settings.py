@@ -85,6 +85,10 @@ USE_TZ = True
 
 LOCALE_PATHS = [BASE_DIR / "locale"]
 
+LANGUAGE_COOKIE_NAME = "electromarket_language"
+LANGUAGE_COOKIE_AGE = 60 * 60 * 24 * 365
+LANGUAGE_COOKIE_HTTPONLY = False
+
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "core" / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
