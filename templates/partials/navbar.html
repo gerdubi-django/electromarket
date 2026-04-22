@@ -4,7 +4,7 @@
   <div class="container navbar-shell">
     <a class="navbar-brand" href="{% url 'core:home' %}">ElectroMarket</a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="{% trans 'Abrir navegación' %}">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -33,8 +33,8 @@
       <div class="navbar-actions">
         <form action="{% url 'set_language' %}" method="post" class="language-switch">
           {% csrf_token %}
-          <input type="hidden" name="next" value="{{ request.get_full_path }}">
-          <select name="language" class="form-select" onchange="this.form.submit()" aria-label="Language selector">
+          <input type="hidden" name="next" value="{{ request.path }}">
+          <select name="language" class="form-select" onchange="this.form.submit()" aria-label="{% trans 'Selector de idioma' %}">
             <option value="es" {% if CURRENT_LANGUAGE == 'es' %}selected{% endif %}>ES</option>
             <option value="en" {% if CURRENT_LANGUAGE == 'en' %}selected{% endif %}>EN</option>
           </select>

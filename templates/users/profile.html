@@ -4,12 +4,22 @@
 {% block content %}
 <div class="row justify-content-center">
   <div class="col-12 col-lg-7">
-    <div class="card p-3 p-md-4">
+    <div class="card profile-card p-3 p-md-4">
+      <p class="profile-card__kicker mb-2">{% trans "Cuenta" %}</p>
       <h1 class="h4 mb-3">{% trans "Perfil" %}</h1>
-      <form method="post" class="d-grid gap-3">
+      <p class="meta-text mb-4">{% trans "Actualizá tu información personal para acelerar futuras compras." %}</p>
+      <form method="post" class="d-grid gap-3 profile-form" novalidate>
         {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-primary">{% trans "Guardar cambios" %}</button>
+        {% for field in form %}
+          <div>
+            <label for="{{ field.id_for_label }}" class="form-label profile-form__label">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+              <div class="invalid-feedback d-block">{{ field.errors|striptags }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+        <button class="btn btn-primary mt-2">{% trans "Guardar cambios" %}</button>
       </form>
     </div>
   </div>
