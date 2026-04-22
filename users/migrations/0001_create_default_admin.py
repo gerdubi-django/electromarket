@@ -1,28 +1,27 @@
+from django.conf import settings
+from django.contrib.auth.hashers import make_password
 from django.db import migrations
 
 
 def create_default_admin(apps, schema_editor):
-    user_model = apps.get_model("auth", "User")
-    admin_user, created = user_model.objects.get_or_create(
+    app_label, model_name = settings.AUTH_USER_MODEL.split(".")
+    user_model = apps.get_model(app_label, model_name)
+
+    user_model.objects.update_or_create(
         username="admin",
         defaults={
+            "email": "admin@electromarket.local",
+            "password": make_password("12345"),
             "is_staff": True,
             "is_superuser": True,
             "is_active": True,
-            "email": "admin@electromarket.local",
         },
     )
-    if created or not admin_user.check_password("12345"):
-        admin_user.set_password("12345")
-        admin_user.is_staff = True
-        admin_user.is_superuser = True
-        admin_user.is_active = True
-        admin_user.save(update_fields=["password", "is_staff", "is_superuser", "is_active"])
 
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("auth", "0012_alter_user_first_name_max_length"),
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
