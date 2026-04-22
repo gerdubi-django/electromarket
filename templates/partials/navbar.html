@@ -1,8 +1,8 @@
 {% load i18n %}
 {% get_current_language as CURRENT_LANGUAGE %}
-<nav class="navbar navbar-expand-lg glass-nav sticky-top app-navbar">
+<nav class="navbar navbar-expand-lg sticky-top app-navbar">
   <div class="container navbar-shell">
-    <a class="navbar-brand neon-text" href="{% url 'core:home' %}">ElectroMarket</a>
+    <a class="navbar-brand" href="{% url 'core:home' %}">ElectroMarket</a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -10,18 +10,22 @@
 
     <div class="collapse navbar-collapse" id="mainNav">
       <ul class="navbar-nav nav-main me-auto">
-        <li class="nav-item"><a class="nav-link" href="{% url 'catalog:product_list' %}">{% trans "Productos" %}</a></li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.app_name == 'catalog' %}active{% endif %}" href="{% url 'catalog:product_list' %}">{% trans "Productos" %}</a>
+        </li>
         {% if user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2" href="{% url 'cart:detail' %}">
+            <a class="nav-link {% if request.resolver_match.app_name == 'cart' %}active{% endif %}" href="{% url 'cart:detail' %}">
               {% trans "Carrito" %}
               <span class="badge cart-badge">{{ cart_items_count }}</span>
             </a>
           </li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'orders:history' %}">{% trans "Mis pedidos" %}</a></li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.app_name == 'orders' %}active{% endif %}" href="{% url 'orders:history' %}">{% trans "Mis pedidos" %}</a>
+          </li>
         {% endif %}
         {% if user.is_staff %}
-          <li class="nav-item"><a class="nav-link" href="{% url 'dashboard:home' %}">{% trans "Panel" %}</a></li>
+          <li class="nav-item"><a class="nav-link {% if request.resolver_match.app_name == 'dashboard' %}active{% endif %}" href="{% url 'dashboard:home' %}">{% trans "Panel" %}</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}">Django Admin</a></li>
         {% endif %}
       </ul>
