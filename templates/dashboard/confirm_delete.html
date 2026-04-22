@@ -1,2 +1,17 @@
 {% extends 'base.html' %}
-{% block content %}<h2>Confirm delete</h2><form method="post" class="card p-3">{% csrf_token %}<button class="btn btn-danger">Confirm</button></form>{% endblock %}
+{% load i18n %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-md-8 col-lg-6">
+    <form method="post" class="card p-3 p-md-4">
+      {% csrf_token %}
+      <h1 class="h4 mb-2">{% trans "Confirmar eliminación" %}</h1>
+      <p class="meta-text">{% trans "Esta acción no se puede deshacer." %}</p>
+      <div class="d-flex justify-content-end gap-2">
+        <a href="javascript:history.back()" class="btn btn-outline-light">{% trans "Cancelar" %}</a>
+        <button class="btn btn-danger">{% trans "Eliminar" %}</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

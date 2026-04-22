@@ -1,9 +1,79 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% block content %}<h2>{% trans "Cart" %}</h2>
-<table class="table table-dark table-striped"><tr><th>{% trans "Product" %}</th><th>{% trans "Quantity" %}</th><th>{% trans "Subtotal" %}</th><th></th></tr>
-{% for item in cart.items.all %}<tr><td>{{ item.product.name }}</td><td><form method="post" action="{% url 'cart:update' item.id %}" class="d-flex gap-2">{% csrf_token %}<input name="quantity" type="number" min="1" max="{{ item.product.stock }}" value="{{ item.quantity }}"><button class="btn btn-sm btn-info">{% trans "Update" %}</button></form></td><td>${{ item.subtotal }}</td><td><form method="post" action="{% url 'cart:remove' item.id %}">{% csrf_token %}<button class="btn btn-sm btn-danger">{% trans "Remove" %}</button></form></td></tr>{% empty %}<tr><td colspan="4">{% trans "Cart is empty" %}</td></tr>{% endfor %}
-</table>
-<h4>{% trans "Total" %}: ${{ cart.total }}</h4>
-<form method="post" action="{% url 'orders:checkout' %}">{% csrf_token %}<button class="btn btn-success">{% trans "Checkout" %}</button></form>
+{% block title %}{% trans 'Carrito' %} | ElectroMarket{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">{% trans "Carrito" %}</h1>
+
+{% if cart.items.exists %}
+  <div class="card p-3 p-md-4 mb-3">
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th>{% trans "Producto" %}</th>
+            <th>{% trans "Precio" %}</th>
+            <th>{% trans "Cantidad" %}</th>
+            <th>{% trans "Subtotal" %}</th>
+            <th class="text-end">{% trans "Acciones" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in cart.items.all %}
+            <tr>
+              <td>{{ item.product.name }}</td>
+              <td>${{ item.product.price }}</td>
+              <td>
+                <form method="post" action="{% url 'cart:update' item.id %}" class="d-flex gap-2" style="max-width: 220px;">
+                  {% csrf_token %}
+                  <input name="quantity" type="number" min="1" max="{{ item.product.stock }}" value="{{ item.quantity }}" class="form-control form-control-sm">
+                  <button class="btn btn-primary btn-sm">{% trans "Actualizar" %}</button>
+                </form>
+              </td>
+              <td>${{ item.subtotal }}</td>
+              <td class="text-end">
+                <form method="post" action="{% url 'cart:remove' item.id %}">
+                  {% csrf_token %}
+                  <button class="btn btn-danger btn-sm">{% trans "Eliminar" %}</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card p-3 p-md-4">
+    <div class="row g-3 align-items-end">
+      <div class="col-12 col-md-6">
+        <h2 class="h5">{% trans "Resumen" %}</h2>
+        <p class="mb-1">{% trans "Subtotal" %}: <strong>${{ cart.total }}</strong></p>
+        <p class="meta-text mb-0">{% trans "El total final puede variar según el medio de pago seleccionado." %}</p>
+      </div>
+      <div class="col-12 col-md-6">
+        <form method="post" action="{% url 'orders:checkout' %}" class="row g-2">
+          {% csrf_token %}
+          <div class="col-12 col-lg-8">
+            <label for="payment_method" class="form-label mb-1">{% trans "Medio de pago" %}</label>
+            <select id="payment_method" name="payment_method" class="form-select" required>
+              <option value="">{% trans "Seleccionar" %}</option>
+              {% for method in payment_methods %}
+                <option value="{{ method.id }}">{{ method.name }} {% if method.adjustment_percent %}({{ method.adjustment_percent }}%){% endif %}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-12 col-lg-4 d-grid">
+            <button class="btn btn-primary">{% trans "Finalizar compra" %}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% else %}
+  <div class="empty-state p-5 text-center">
+    <h2 class="h5 mb-2">{% trans "Tu carrito está vacío" %}</h2>
+    <p class="mb-3">{% trans "Explorá nuestros productos y agregá tus favoritos." %}</p>
+    <a href="{% url 'catalog:product_list' %}" class="btn btn-primary">{% trans "Ir a productos" %}</a>
+  </div>
+{% endif %}
 {% endblock %}

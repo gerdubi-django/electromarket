@@ -1,8 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
+from django.utils.translation import gettext as _
 from django.views.generic import TemplateView, View
 from catalog.models import Product
+from orders.models import PaymentMethod
 from .models import Cart, CartItem
 
 
@@ -13,36 +15,46 @@ class CartDetailView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         cart, _ = Cart.objects.get_or_create(user=self.request.user)
         context["cart"] = cart
+        context["payment_methods"] = PaymentMethod.objects.filter(is_active=True)
         return context
 
 
 class AddToCartView(LoginRequiredMixin, View):
     def post(self, request, product_id):
         product = get_object_or_404(Product, id=product_id, is_active=True)
-        quantity = max(1, int(request.POST.get("quantity", 1)))
-        cart, _ = Cart.objects.get_or_create(user=request.user)
-        item, _ = CartItem.objects.get_or_create(cart=cart, product=product)
+        try:
+            quantity = max(1, int(request.POST.get("quantity", 1)))
+        except (TypeError, ValueError):
+            quantity = 1
 
-        if item.quantity + quantity > product.stock:
-            messages.error(request, "Not enough stock")
+        cart, _ = Cart.objects.get_or_create(user=request.user)
+        item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+
+        new_quantity = quantity if created else item.quantity + quantity
+        if new_quantity > product.stock:
+            messages.error(request, _("No hay stock suficiente"))
             return redirect("catalog:product_detail", slug=product.slug)
 
-        item.quantity += quantity
+        item.quantity = new_quantity
         item.save(update_fields=["quantity"])
-        messages.success(request, "Product added to cart")
+        messages.success(request, _("Producto agregado al carrito"))
         return redirect("cart:detail")
 
 
 class UpdateCartItemView(LoginRequiredMixin, View):
     def post(self, request, item_id):
         item = get_object_or_404(CartItem, id=item_id, cart__user=request.user)
-        quantity = max(1, int(request.POST.get("quantity", 1)))
+        try:
+            quantity = max(1, int(request.POST.get("quantity", 1)))
+        except (TypeError, ValueError):
+            quantity = 1
+
         if quantity > item.product.stock:
-            messages.error(request, "Not enough stock")
+            messages.error(request, _("No hay stock suficiente"))
         else:
             item.quantity = quantity
             item.save(update_fields=["quantity"])
-            messages.success(request, "Cart updated")
+            messages.success(request, _("Carrito actualizado"))
         return redirect("cart:detail")
 
 
@@ -50,5 +62,5 @@ class RemoveCartItemView(LoginRequiredMixin, View):
     def post(self, request, item_id):
         item = get_object_or_404(CartItem, id=item_id, cart__user=request.user)
         item.delete()
-        messages.info(request, "Item removed")
+        messages.info(request, _("Producto eliminado del carrito"))
         return redirect("cart:detail")

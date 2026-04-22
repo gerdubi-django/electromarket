@@ -1,13 +1,75 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% block title %}{% trans 'Productos' %} | ElectroMarket{% endblock %}
 {% block content %}
-<h2>{% trans "Products" %}</h2>
-<form method="get" class="row g-2 mb-4">
-  <div class="col-md-4"><input name="search" class="form-control" placeholder="{% trans 'Search products' %}" value="{{ request.GET.search }}"></div>
-  <div class="col-md-3"><select name="category" class="form-select"><option value="">{% trans "All categories" %}</option>{% for cat in categories %}<option value="{{ cat.slug }}">{{ cat.name }}</option>{% endfor %}</select></div>
-  <div class="col-md-2"><input name="min_price" type="number" step="0.01" class="form-control" placeholder="Min"></div>
-  <div class="col-md-2"><input name="max_price" type="number" step="0.01" class="form-control" placeholder="Max"></div>
-  <div class="col-md-1"><button class="btn btn-info w-100">{% trans "Go" %}</button></div>
-</form>
-<div class="row g-4">{% for product in products %}<div class="col-6 col-md-3"><div class="card product-card h-100"><img src="{{ product.image_url|default:'https://placehold.co/600x400' }}" class="card-img-top"><div class="card-body"><h6>{{ product.name }}</h6><small>{{ product.category.name }}</small><p>${{ product.price }}</p><a href="{{ product.get_absolute_url }}" class="btn btn-sm btn-info">{% trans "View" %}</a></div></div></div>{% endfor %}</div>
+<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+  <h1 class="h3 mb-0">{% trans "Productos" %}</h1>
+</div>
+
+<section class="card p-3 p-md-4 mb-4">
+  <form method="get" class="row g-2 g-md-3 align-items-end">
+    <div class="col-12 col-md-4">
+      <label class="form-label mb-1" for="search">{% trans "Buscar" %}</label>
+      <input id="search" name="search" class="form-control" placeholder="{% trans 'Nombre o descripción' %}" value="{{ request.GET.search|default:'' }}">
+    </div>
+    <div class="col-12 col-md-3">
+      <label class="form-label mb-1" for="category">{% trans "Categoría" %}</label>
+      <select id="category" name="category" class="form-select">
+        <option value="">{% trans "Todas" %}</option>
+        {% for cat in categories %}
+          <option value="{{ cat.slug }}" {% if request.GET.category == cat.slug %}selected{% endif %}>{{ cat.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-6 col-md-2">
+      <label class="form-label mb-1" for="min_price">{% trans "Precio mín." %}</label>
+      <input id="min_price" name="min_price" type="number" step="0.01" class="form-control" value="{{ request.GET.min_price|default:'' }}">
+    </div>
+    <div class="col-6 col-md-2">
+      <label class="form-label mb-1" for="max_price">{% trans "Precio máx." %}</label>
+      <input id="max_price" name="max_price" type="number" step="0.01" class="form-control" value="{{ request.GET.max_price|default:'' }}">
+    </div>
+    <div class="col-12 col-md-1 d-grid">
+      <button class="btn btn-primary">OK</button>
+    </div>
+  </form>
+</section>
+
+<div class="row g-3 g-md-4">
+  {% for product in products %}
+    <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+      <article class="card product-card h-100">
+        <img src="{{ product.image_url|default:'https://placehold.co/640x480?text=ElectroMarket' }}" class="product-img card-img-top" alt="{{ product.name }}">
+        <div class="card-body d-flex flex-column">
+          <h2 class="h6 mb-1">{{ product.name }}</h2>
+          <p class="meta-text mb-2">{{ product.category.name }}</p>
+          <p class="price-highlight mb-3">${{ product.price }}</p>
+          <a href="{{ product.get_absolute_url }}" class="btn btn-primary btn-sm mt-auto">{% trans "Ver detalle" %}</a>
+        </div>
+      </article>
+    </div>
+  {% empty %}
+    <div class="col-12">
+      <div class="empty-state p-4 text-center">{% trans "No encontramos productos para ese filtro." %}</div>
+    </div>
+  {% endfor %}
+</div>
+
+{% if is_paginated %}
+  <nav aria-label="Pagination" class="mt-4">
+    <ul class="pagination justify-content-center">
+      {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+      {% endif %}
+      {% for page_number in paginator.page_range %}
+        <li class="page-item {% if page_obj.number == page_number %}active{% endif %}">
+          <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+        </li>
+      {% endfor %}
+      {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endif %}
 {% endblock %}
