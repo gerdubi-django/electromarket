@@ -1,2 +1,19 @@
 {% extends 'base.html' %}
-{% block content %}<h2>Orders</h2><table class="table table-dark"><tr><th>ID</th><th>User</th><th>Total</th><th>Status</th><th></th></tr>{% for o in orders %}<tr><td>{{ o.id }}</td><td>{{ o.user.username }}</td><td>${{ o.total }}</td><td>{{ o.get_status_display }}</td><td><a class="btn btn-sm btn-info" href="{% url 'dashboard:order_status' o.id %}">Change</a></td></tr>{% endfor %}</table>{% endblock %}
+{% load i18n %}
+{% block content %}
+<h1 class="h3 mb-3">{% trans "Pedidos" %}</h1>
+<div class="card p-3">
+  <div class="table-responsive">
+    <table class="table align-middle">
+      <thead><tr><th>ID</th><th>{% trans "Usuario" %}</th><th>{% trans "Pago" %}</th><th>{% trans "Total" %}</th><th>{% trans "Estado" %}</th><th class="text-end">{% trans "Acción" %}</th></tr></thead>
+      <tbody>
+        {% for o in orders %}
+          <tr><td>#{{ o.id }}</td><td>{{ o.user.username }}</td><td>{{ o.payment_method|default:'-' }}</td><td>${{ o.total }}</td><td>{{ o.get_status_display }}</td><td class="text-end"><a class="btn btn-sm btn-outline-info" href="{% url 'dashboard:order_status' o.id %}">{% trans "Cambiar" %}</a></td></tr>
+        {% empty %}
+          <tr><td colspan="6" class="text-center">{% trans "Sin pedidos aún." %}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

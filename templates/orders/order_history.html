@@ -1,5 +1,44 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% block content %}<h2>{% trans "Order history" %}</h2>
-{% for order in orders %}<div class="card mb-3 p-3"><div class="d-flex justify-content-between"><strong>#{{ order.id }}</strong><span>{{ order.get_status_display }}</span></div><small>{{ order.created_at }}</small><ul>{% for item in order.items.all %}<li>{{ item.product_name }} x{{ item.quantity }} - ${{ item.subtotal }}</li>{% endfor %}</ul><p>{% trans "Total" %}: ${{ order.total }}</p>{% if order.status == 'pending' %}<form method="post" action="{% url 'orders:simulate_payment' order.id %}">{% csrf_token %}<button class="btn btn-warning btn-sm">{% trans "Simulate payment" %}</button></form>{% endif %}</div>{% empty %}<p>{% trans "No orders yet." %}</p>{% endfor %}
+{% block title %}{% trans 'Mis pedidos' %} | ElectroMarket{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">{% trans "Mis pedidos" %}</h1>
+
+<div class="row g-3">
+  {% for order in orders %}
+    <div class="col-12">
+      <div class="card p-3 p-md-4">
+        <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-2">
+          <div>
+            <h2 class="h5 mb-1">{% trans "Pedido" %} #{{ order.id }}</h2>
+            <p class="meta-text mb-0">{{ order.created_at }}</p>
+          </div>
+          <span class="badge text-bg-secondary">{{ order.get_status_display }}</span>
+        </div>
+
+        <ul class="mb-3">
+          {% for item in order.items.all %}
+            <li>{{ item.product_name }} x{{ item.quantity }} - ${{ item.subtotal }}</li>
+          {% endfor %}
+        </ul>
+
+        <p class="mb-1">{% trans "Subtotal" %}: <strong>${{ order.subtotal }}</strong></p>
+        {% if order.payment_method %}
+          <p class="mb-1">{% trans "Pago" %}: {{ order.payment_method.name }}</p>
+          <p class="mb-1">{% trans "Ajuste" %}: ${{ order.adjustment_amount }}</p>
+        {% endif %}
+        <p class="mb-3">{% trans "Total" %}: <strong>${{ order.total }}</strong></p>
+
+        {% if order.status == 'pending' %}
+          <form method="post" action="{% url 'orders:simulate_payment' order.id %}">
+            {% csrf_token %}
+            <button class="btn btn-warning btn-sm">{% trans "Simular pago" %}</button>
+          </form>
+        {% endif %}
+      </div>
+    </div>
+  {% empty %}
+    <div class="col-12"><div class="empty-state p-4 text-center">{% trans "Aún no realizaste pedidos." %}</div></div>
+  {% endfor %}
+</div>
 {% endblock %}

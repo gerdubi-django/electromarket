@@ -67,7 +67,7 @@ class OrderListView(AdminRequiredMixin, ListView):
     context_object_name = "orders"
 
     def get_queryset(self):
-        return Order.objects.select_related("user").prefetch_related("items")
+        return Order.objects.select_related("user", "payment_method").prefetch_related("items")
 
 
 class OrderStatusUpdateView(AdminRequiredMixin, UpdateView):

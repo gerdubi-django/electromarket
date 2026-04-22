@@ -1,10 +1,33 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% block title %}{{ product.name }} | ElectroMarket{% endblock %}
 {% block content %}
-<div class="row">
-  <div class="col-md-6"><img class="img-fluid rounded" src="{{ product.image_url|default:'https://placehold.co/700x500' }}"></div>
-  <div class="col-md-6"><h2>{{ product.name }}</h2><p>{{ product.description }}</p><p>${{ product.price }}</p><p>{% trans "Stock" %}: {{ product.stock }}</p>
-    <form method="post" action="{% url 'cart:add' product.id %}">{% csrf_token %}<input type="number" min="1" max="{{ product.stock }}" name="quantity" value="1" class="form-control mb-2"><button class="btn btn-info" {% if product.stock < 1 %}disabled{% endif %}>{% trans "Add to cart" %}</button></form>
+<div class="row g-4">
+  <div class="col-12 col-lg-6">
+    <img class="product-img rounded-4 w-100" src="{{ product.image_url|default:'https://placehold.co/800x600?text=ElectroMarket' }}" alt="{{ product.name }}">
+  </div>
+  <div class="col-12 col-lg-6">
+    <div class="card h-100">
+      <div class="card-body d-flex flex-column">
+        <p class="meta-text mb-2">{{ product.category.name }}</p>
+        <h1 class="h3">{{ product.name }}</h1>
+        <p class="meta-text">{{ product.description }}</p>
+        <p class="price-highlight mt-2">${{ product.price }}</p>
+        <p class="meta-text">{% trans "Stock disponible" %}: {{ product.stock }}</p>
+        <form method="post" action="{% url 'cart:add' product.id %}" class="mt-auto">
+          {% csrf_token %}
+          <div class="row g-2 align-items-end">
+            <div class="col-5">
+              <label class="form-label mb-1" for="quantity">{% trans "Cantidad" %}</label>
+              <input id="quantity" type="number" min="1" max="{{ product.stock }}" name="quantity" value="1" class="form-control" {% if product.stock < 1 %}disabled{% endif %}>
+            </div>
+            <div class="col-7 d-grid">
+              <button class="btn btn-primary" {% if product.stock < 1 %}disabled{% endif %}>{% trans "Agregar al carrito" %}</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}

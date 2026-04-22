@@ -1,2 +1,29 @@
 {% extends 'base.html' %}
-{% block content %}<h2>Products</h2><a class="btn btn-info mb-2" href="{% url 'dashboard:product_create' %}">New product</a> <a class="btn btn-outline-info mb-2" href="{% url 'dashboard:category_create' %}">New category</a><table class="table table-dark"><tr><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th></th></tr>{% for p in products %}<tr><td>{{ p.name }}</td><td>{{ p.category }}</td><td>${{ p.price }}</td><td>{{ p.stock }}</td><td><a href="{% url 'dashboard:product_update' p.id %}" class="btn btn-sm btn-warning">Edit</a> <a href="{% url 'dashboard:product_delete' p.id %}" class="btn btn-sm btn-danger">Delete</a></td></tr>{% endfor %}</table>{% endblock %}
+{% load i18n %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+  <h1 class="h3 mb-0">{% trans "Productos" %}</h1>
+  <div class="d-flex gap-2">
+    <a class="btn btn-primary" href="{% url 'dashboard:product_create' %}">{% trans "Nuevo producto" %}</a>
+    <a class="btn btn-outline-info" href="{% url 'dashboard:category_create' %}">{% trans "Nueva categoría" %}</a>
+  </div>
+</div>
+<div class="card p-3">
+  <div class="table-responsive">
+    <table class="table align-middle">
+      <thead><tr><th>{% trans "Nombre" %}</th><th>{% trans "Categoría" %}</th><th>{% trans "Precio" %}</th><th>{% trans "Stock" %}</th><th>{% trans "Estado" %}</th><th class="text-end">{% trans "Acciones" %}</th></tr></thead>
+      <tbody>
+        {% for p in products %}
+          <tr>
+            <td>{{ p.name }}</td><td>{{ p.category }}</td><td>${{ p.price }}</td><td>{{ p.stock }}</td>
+            <td>{% if p.is_active %}<span class="badge text-bg-success">{% trans "Activo" %}</span>{% else %}<span class="badge text-bg-secondary">{% trans "Inactivo" %}</span>{% endif %}</td>
+            <td class="text-end"><a href="{% url 'dashboard:product_update' p.id %}" class="btn btn-sm btn-outline-info">{% trans "Editar" %}</a> <a href="{% url 'dashboard:product_delete' p.id %}" class="btn btn-sm btn-danger">{% trans "Eliminar" %}</a></td>
+          </tr>
+        {% empty %}
+          <tr><td colspan="6" class="text-center">{% trans "No hay productos cargados." %}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
