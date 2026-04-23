@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+from django.utils.translation import gettext_lazy as _
 
 load_dotenv()
 
@@ -46,6 +47,7 @@ TEMPLATES = [
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.request",
+                "django.template.context_processors.i18n",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "cart.context_processors.cart_items_count",
@@ -74,10 +76,10 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-LANGUAGE_CODE = os.getenv("LANGUAGE_CODE", "es")
+LANGUAGE_CODE = "es"
 LANGUAGES = [
-    ("es", "Español"),
-    ("en", "English"),
+    ("es", _("Spanish")),
+    ("en", _("English")),
 ]
 TIME_ZONE = "UTC"
 USE_I18N = True

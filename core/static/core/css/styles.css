@@ -5,8 +5,11 @@
   --surface-2: #16233f;
   --surface-3: #1b2b4b;
   --text: #edf4ff;
+  --text-heading: #f4f9ff;
+  --text-subtitle: #d6e7ff;
   --text-muted: #b7c7e2;
   --text-dim: #8ea1c4;
+  --text-value: #95e6ff;
   --border: rgba(124, 170, 255, 0.24);
   --border-strong: rgba(122, 203, 255, 0.44);
   --accent: #49c7ff;
@@ -187,6 +190,37 @@ a:hover {
 .section-title {
   margin-bottom: var(--space-4);
   font-weight: 650;
+  color: var(--text-heading);
+}
+
+.app-panel {
+  color: var(--text);
+}
+
+.app-panel h1,
+.app-panel h2,
+.app-panel h3,
+.app-panel h4,
+.app-panel h5,
+.app-panel h6 {
+  color: var(--text-heading);
+}
+
+.app-panel p,
+.app-panel li,
+.app-panel label,
+.app-panel span {
+  color: var(--text-subtitle);
+}
+
+.app-panel .meta-text,
+.app-panel .text-muted {
+  color: var(--text-muted) !important;
+}
+
+.app-panel strong,
+.app-panel .value-text {
+  color: var(--text-value);
 }
 
 .product-grid {
@@ -205,16 +239,19 @@ a:hover {
   box-shadow: var(--shadow-md);
 }
 
-.product-img {
+.product-media {
+  aspect-ratio: 4 / 3;
   width: 100%;
-  height: 220px;
-  object-fit: cover;
-  object-position: center;
+  overflow: hidden;
   background: linear-gradient(145deg, rgba(18, 34, 63, 0.95), rgba(8, 16, 32, 0.95));
 }
 
-.product-img--catalog {
-  height: 220px;
+.product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 .product-img--detail {
@@ -443,7 +480,7 @@ a:hover {
 }
 
 .cart-summary__amount {
-  color: #84e0ff;
+  color: var(--text-value);
   font-size: 1.35rem;
   font-weight: 700;
   letter-spacing: 0.01em;
@@ -469,6 +506,29 @@ a:hover {
 .profile-form__label {
   color: #dcebff;
 }
+
+.order-list {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.order-list li {
+  color: var(--text-subtitle);
+  margin-bottom: 0.3rem;
+}
+
+.badge.text-bg-secondary {
+  background: rgba(130, 174, 241, 0.22) !important;
+  color: #dff2ff !important;
+  border-color: rgba(154, 209, 255, 0.55);
+}
+
+.badge.text-bg-success {
+  background: rgba(66, 193, 149, 0.2) !important;
+  color: #dcfff1 !important;
+  border-color: rgba(110, 228, 186, 0.5);
+}
+
 
 .invalid-feedback {
   color: #ffc1d0;
@@ -520,9 +580,8 @@ a:hover {
     padding: 1.2rem !important;
   }
 
-  .product-img,
-  .product-img--catalog {
-    height: 200px;
+  .product-media {
+    aspect-ratio: 16 / 11;
   }
 
   .product-img--detail {

@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-22 15:59+0000\n"
+"POT-Creation-Date: 2026-04-22 17:01+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 
@@ -21,6 +21,14 @@ msgstr "Carrito actualizado"
 #: cart/views.py:65
 msgid "Producto eliminado del carrito"
 msgstr "Producto eliminado del carrito"
+
+#: config/settings.py:81
+msgid "Spanish"
+msgstr "Español"
+
+#: config/settings.py:82
+msgid "English"
+msgstr "Inglés"
 
 #: orders/models.py:28
 msgid "Pendiente"
@@ -48,20 +56,21 @@ msgid "Pago simulado correctamente"
 msgstr "Pago simulado correctamente"
 
 #: templates/cart/cart_detail.html:3 templates/cart/cart_detail.html:5
-#: templates/partials/navbar.html:19
-msgid "Carrito"
+#: templates/partials/navbar.html:21
+msgid "Cart"
 msgstr "Carrito"
 
 #: templates/cart/cart_detail.html:13
-msgid "Producto"
+#| msgid "Producto"
+msgid "Product"
 msgstr "Producto"
 
-#: templates/cart/cart_detail.html:14 templates/dashboard/products.html:14
-msgid "Precio"
+#: templates/cart/cart_detail.html:14
+msgid "Price"
 msgstr "Precio"
 
-#: templates/cart/cart_detail.html:15 templates/catalog/product_detail.html:21
-msgid "Cantidad"
+#: templates/cart/cart_detail.html:15
+msgid "Quantity"
 msgstr "Cantidad"
 
 #: templates/cart/cart_detail.html:16 templates/cart/cart_detail.html:53
@@ -69,135 +78,142 @@ msgstr "Cantidad"
 msgid "Subtotal"
 msgstr "Subtotal"
 
-#: templates/cart/cart_detail.html:17 templates/dashboard/products.html:14
-msgid "Acciones"
+#: templates/cart/cart_detail.html:17
+#| msgid "Activo"
+msgid "Actions"
 msgstr "Acciones"
 
 #: templates/cart/cart_detail.html:29
-msgid "Actualizar"
+msgid "Update"
 msgstr "Actualizar"
 
 #: templates/cart/cart_detail.html:36
-#: templates/dashboard/confirm_delete.html:12
-#: templates/dashboard/products.html:20
-msgid "Eliminar"
+msgid "Delete"
 msgstr "Eliminar"
 
 #: templates/cart/cart_detail.html:50
-msgid "Resumen"
+msgid "Summary"
 msgstr "Resumen"
 
 #: templates/cart/cart_detail.html:51
-msgid "Detalle de compra"
+msgid "Purchase details"
 msgstr "Detalle de compra"
 
 #: templates/cart/cart_detail.html:56
-msgid "El total final puede variar según el medio de pago seleccionado."
+msgid "The final total may vary depending on the selected payment method."
 msgstr "El total final puede variar según el medio de pago seleccionado."
 
 #: templates/cart/cart_detail.html:62
-msgid "Total estimado"
+msgid "Estimated total"
 msgstr "Total estimado"
 
 #: templates/cart/cart_detail.html:68
-msgid "Medio de pago"
+msgid "Payment method"
 msgstr "Medio de pago"
 
 #: templates/cart/cart_detail.html:70
-msgid "Seleccionar"
+msgid "Select"
 msgstr "Seleccionar"
 
 #: templates/cart/cart_detail.html:77
-msgid "Finalizar compra"
+msgid "Checkout"
 msgstr "Finalizar compra"
 
 #: templates/cart/cart_detail.html:86
-msgid "Tu carrito está vacío"
+msgid "Your cart is empty"
 msgstr "Tu carrito está vacío"
 
 #: templates/cart/cart_detail.html:87
-msgid "Explorá nuestros productos y agregá tus favoritos."
+msgid "Browse our products and add your favorites."
 msgstr "Explorá nuestros productos y agregá tus favoritos."
 
 #: templates/cart/cart_detail.html:88
-msgid "Ir a productos"
+#| msgid "Ir a productos"
+msgid "Go to products"
 msgstr "Ir a productos"
 
 #: templates/catalog/product_detail.html:16
 msgid "Stock disponible"
 msgstr "Stock disponible"
 
+#: templates/catalog/product_detail.html:21
+msgid "Cantidad"
+msgstr "Cantidad"
+
 #: templates/catalog/product_detail.html:25
 msgid "Agregar al carrito"
 msgstr "Agregar al carrito"
 
 #: templates/catalog/product_list.html:3 templates/catalog/product_list.html:6
-#: templates/dashboard/products.html:5 templates/partials/navbar.html:14
-msgid "Productos"
+#: templates/partials/navbar.html:16
+#| msgid "Productos"
+msgid "Products"
 msgstr "Productos"
 
 #: templates/catalog/product_list.html:12
-msgid "Buscar"
+msgid "Search"
 msgstr "Buscar"
 
 #: templates/catalog/product_list.html:13
-msgid "Nombre o descripción"
+#| msgid "Nombre o descripción"
+msgid "Name or description"
 msgstr "Nombre o descripción"
 
-#: templates/catalog/product_list.html:16 templates/dashboard/products.html:14
-msgid "Categoría"
+#: templates/catalog/product_list.html:16
+#| msgid "Categoría"
+msgid "Category"
 msgstr "Categoría"
 
 #: templates/catalog/product_list.html:18
-msgid "Todas"
+msgid "All"
 msgstr "Todas"
 
 #: templates/catalog/product_list.html:25
-msgid "Precio mín."
+msgid "Min price"
 msgstr "Precio mín."
 
 #: templates/catalog/product_list.html:29
-msgid "Precio máx."
+msgid "Max price"
 msgstr "Precio máx."
 
 #: templates/catalog/product_list.html:33
-msgid "Aplicar"
+msgid "Apply"
 msgstr "Aplicar"
 
-#: templates/catalog/product_list.html:47 templates/core/home.html:24
-msgid "Ver detalle"
+#: templates/catalog/product_list.html:49 templates/core/home.html:26
+#| msgid "Ver detalle"
+msgid "View details"
 msgstr "Ver detalle"
 
-#: templates/catalog/product_list.html:53
-msgid "No encontramos productos para ese filtro."
+#: templates/catalog/product_list.html:55
+msgid "No products found for this filter."
 msgstr "No encontramos productos para ese filtro."
 
 #: templates/core/home.html:3
-msgid "Inicio"
+msgid "Home"
 msgstr "Inicio"
 
 #: templates/core/home.html:6
-msgid "Tu tienda de informática profesional"
+msgid "Your professional computer store"
 msgstr "Tu tienda de informática profesional"
 
 #: templates/core/home.html:7
 msgid ""
-"Equipos, periféricos y componentes con disponibilidad real, precios claros y"
-" experiencia de compra rápida."
-msgstr ""
-"Equipos, periféricos y componentes con disponibilidad real, precios claros y"
-" experiencia de compra rápida."
+"Hardware, peripherals, and components with real stock, transparent prices, "
+"and a fast checkout experience."
+msgstr "Equipos, periféricos y componentes con disponibilidad real, precios claros y experiencia de compra rápida."
 
 #: templates/core/home.html:8
-msgid "Ver productos"
+#| msgid "Ver productos"
+msgid "View products"
 msgstr "Ver productos"
 
 #: templates/core/home.html:12
-msgid "Destacados"
+msgid "Featured"
 msgstr "Destacados"
 
-#: templates/core/home.html:30
-msgid "Todavía no hay productos publicados."
+#: templates/core/home.html:32
+msgid "There are no published products yet."
 msgstr "Todavía no hay productos publicados."
 
 #: templates/dashboard/category_form.html:4
@@ -225,7 +241,12 @@ msgstr "Confirmar eliminación"
 msgid "Esta acción no se puede deshacer."
 msgstr "Esta acción no se puede deshacer."
 
-#: templates/dashboard/home.html:3 templates/partials/navbar.html:28
+#: templates/dashboard/confirm_delete.html:12
+#: templates/dashboard/products.html:20
+msgid "Eliminar"
+msgstr "Eliminar"
+
+#: templates/dashboard/home.html:3
 msgid "Panel"
 msgstr "Panel"
 
@@ -257,7 +278,7 @@ msgstr "Actualizar estado"
 msgid "Usuario"
 msgstr "Usuario"
 
-#: templates/dashboard/orders.html:8 templates/orders/order_history.html:27
+#: templates/dashboard/orders.html:8
 msgid "Pago"
 msgstr "Pago"
 
@@ -285,6 +306,10 @@ msgstr "Sin pedidos aún."
 msgid "Formulario de producto"
 msgstr "Formulario de producto"
 
+#: templates/dashboard/products.html:5
+msgid "Productos"
+msgstr "Productos"
+
 #: templates/dashboard/products.html:7
 msgid "Nuevo producto"
 msgstr "Nuevo producto"
@@ -298,8 +323,20 @@ msgid "Nombre"
 msgstr "Nombre"
 
 #: templates/dashboard/products.html:14
+msgid "Categoría"
+msgstr "Categoría"
+
+#: templates/dashboard/products.html:14
+msgid "Precio"
+msgstr "Precio"
+
+#: templates/dashboard/products.html:14
 msgid "Stock"
 msgstr "Stock"
+
+#: templates/dashboard/products.html:14
+msgid "Acciones"
+msgstr "Acciones"
 
 #: templates/dashboard/products.html:19
 msgid "Activo"
@@ -318,71 +355,93 @@ msgid "No hay productos cargados."
 msgstr "No hay productos cargados."
 
 #: templates/orders/order_history.html:3 templates/orders/order_history.html:5
-#: templates/partials/navbar.html:24
-msgid "Mis pedidos"
+#: templates/partials/navbar.html:26
+msgid "My orders"
 msgstr "Mis pedidos"
 
 #: templates/orders/order_history.html:13
-msgid "Pedido"
+msgid "Order"
 msgstr "Pedido"
 
+#: templates/orders/order_history.html:27
+msgid "Payment"
+msgstr "Pago"
+
 #: templates/orders/order_history.html:28
-msgid "Ajuste"
+#| msgid "Ajuste"
+msgid "Adjustment"
 msgstr "Ajuste"
 
 #: templates/orders/order_history.html:35
-msgid "Simular pago"
+#| msgid "Simular pago"
+msgid "Simulate payment"
 msgstr "Simular pago"
 
 #: templates/orders/order_history.html:41
-msgid "Aún no realizaste pedidos."
+msgid "You have not placed any orders yet."
 msgstr "Aún no realizaste pedidos."
 
-#: templates/partials/navbar.html:7
-msgid "Abrir navegación"
+#: templates/partials/navbar.html:9
+msgid "Open navigation"
 msgstr "Abrir navegación"
 
-#: templates/partials/navbar.html:37
-msgid "Selector de idioma"
+#: templates/partials/navbar.html:30
+msgid "Dashboard"
+msgstr "Panel"
+
+#: templates/partials/navbar.html:31
+msgid "Django Admin"
+msgstr "Django Admin"
+
+#: templates/partials/navbar.html:39
+msgid "Language selector"
 msgstr "Selector de idioma"
 
-#: templates/partials/navbar.html:44 templates/users/profile.html:3
+#: templates/partials/navbar.html:47 templates/users/profile.html:3
 #: templates/users/profile.html:9
-msgid "Perfil"
+msgid "Profile"
 msgstr "Perfil"
 
-#: templates/partials/navbar.html:47
-msgid "Salir"
+#: templates/partials/navbar.html:50
+msgid "Logout"
 msgstr "Salir"
 
-#: templates/partials/navbar.html:50 templates/users/login.html:3
-#: templates/users/login.html:8
-msgid "Ingresar"
+#: templates/partials/navbar.html:53
+msgid "Login"
 msgstr "Ingresar"
 
-#: templates/partials/navbar.html:51 templates/users/register.html:8
-msgid "Crear cuenta"
+#: templates/partials/navbar.html:54
+#| msgid "Crear cuenta"
+msgid "Create account"
 msgstr "Crear cuenta"
+
+#: templates/users/login.html:3 templates/users/login.html:8
+msgid "Ingresar"
+msgstr "Ingresar"
 
 #: templates/users/login.html:12
 msgid "Entrar"
 msgstr "Entrar"
 
 #: templates/users/profile.html:8
-msgid "Cuenta"
+msgid "Account"
 msgstr "Cuenta"
 
 #: templates/users/profile.html:10
-msgid "Actualizá tu información personal para acelerar futuras compras."
+msgid "Update your personal information to speed up future purchases."
 msgstr "Actualizá tu información personal para acelerar futuras compras."
 
 #: templates/users/profile.html:22
-msgid "Guardar cambios"
+msgid "Save changes"
 msgstr "Guardar cambios"
 
 #: templates/users/register.html:3
 msgid "Registro"
 msgstr "Registro"
+
+#: templates/users/register.html:8
+msgid "Crear cuenta"
+msgstr "Crear cuenta"
 
 #: templates/users/register.html:12
 msgid "Registrarme"
@@ -412,23 +471,108 @@ msgstr "Sesión cerrada"
 msgid "Perfil actualizado"
 msgstr "Perfil actualizado"
 
-#~ msgid "Cart"
-#~ msgstr "Cart"
+#~ msgid "Carrito"
+#~ msgstr "Carrito"
 
-#~ msgid "Login"
-#~ msgstr "Login"
+#~ msgid "Actualizar"
+#~ msgstr "Actualizar"
 
-#~ msgid "Profile"
-#~ msgstr "Profile"
+#~ msgid "Resumen"
+#~ msgstr "Resumen"
 
-#~ msgid "Logout"
-#~ msgstr "Logout"
+#~ msgid "Detalle de compra"
+#~ msgstr "Detalle de compra"
+
+#~ msgid "El total final puede variar según el medio de pago seleccionado."
+#~ msgstr "El total final puede variar según el medio de pago seleccionado."
+
+#~ msgid "Total estimado"
+#~ msgstr "Total estimado"
+
+#~ msgid "Medio de pago"
+#~ msgstr "Medio de pago"
+
+#~ msgid "Seleccionar"
+#~ msgstr "Seleccionar"
+
+#~ msgid "Finalizar compra"
+#~ msgstr "Finalizar compra"
+
+#~ msgid "Tu carrito está vacío"
+#~ msgstr "Tu carrito está vacío"
+
+#~ msgid "Explorá nuestros productos y agregá tus favoritos."
+#~ msgstr "Explorá nuestros productos y agregá tus favoritos."
+
+#~ msgid "Buscar"
+#~ msgstr "Buscar"
+
+#~ msgid "Todas"
+#~ msgstr "Todas"
+
+#~ msgid "Precio mín."
+#~ msgstr "Precio mín."
+
+#~ msgid "Precio máx."
+#~ msgstr "Precio máx."
+
+#~ msgid "Aplicar"
+#~ msgstr "Aplicar"
+
+#~ msgid "No encontramos productos para ese filtro."
+#~ msgstr "No encontramos productos para ese filtro."
+
+#~ msgid "Inicio"
+#~ msgstr "Inicio"
+
+#~ msgid "Tu tienda de informática profesional"
+#~ msgstr "Tu tienda de informática profesional"
+
+#~ msgid ""
+#~ "Equipos, periféricos y componentes con disponibilidad real, precios "
+#~ "claros y experiencia de compra rápida."
+#~ msgstr ""
+#~ "Equipos, periféricos y componentes con disponibilidad real, precios "
+#~ "claros y experiencia de compra rápida."
+
+#~ msgid "Destacados"
+#~ msgstr "Destacados"
+
+#~ msgid "Todavía no hay productos publicados."
+#~ msgstr "Todavía no hay productos publicados."
+
+#~ msgid "Mis pedidos"
+#~ msgstr "Mis pedidos"
+
+#~ msgid "Pedido"
+#~ msgstr "Pedido"
+
+#~ msgid "Aún no realizaste pedidos."
+#~ msgstr "Aún no realizaste pedidos."
+
+#~ msgid "Abrir navegación"
+#~ msgstr "Abrir navegación"
+
+#~ msgid "Selector de idioma"
+#~ msgstr "Selector de idioma"
+
+#~ msgid "Perfil"
+#~ msgstr "Perfil"
+
+#~ msgid "Salir"
+#~ msgstr "Salir"
+
+#~ msgid "Cuenta"
+#~ msgstr "Cuenta"
+
+#~ msgid "Actualizá tu información personal para acelerar futuras compras."
+#~ msgstr "Actualizá tu información personal para acelerar futuras compras."
+
+#~ msgid "Guardar cambios"
+#~ msgstr "Guardar cambios"
 
 #~ msgid "Order history"
 #~ msgstr "Order history"
 
 #~ msgid "Add to cart"
 #~ msgstr "Add to cart"
-
-#~ msgid "Checkout"
-#~ msgstr "Checkout"

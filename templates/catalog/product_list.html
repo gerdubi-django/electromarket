@@ -1,36 +1,36 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% block title %}{% trans 'Productos' %} | ElectroMarket{% endblock %}
+{% block title %}{% trans 'Products' %} | ElectroMarket{% endblock %}
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
-  <h1 class="h3 section-title mb-0">{% trans "Productos" %}</h1>
+  <h1 class="h3 section-title mb-0">{% trans "Products" %}</h1>
 </div>
 
-<section class="card p-3 p-md-4 mb-4">
+<section class="card p-3 p-md-4 mb-4 app-panel">
   <form method="get" class="row g-3 align-items-end filters-form">
     <div class="col-12 col-lg-4">
-      <label class="form-label" for="search">{% trans "Buscar" %}</label>
-      <input id="search" name="search" class="form-control" placeholder="{% trans 'Nombre o descripción' %}" value="{{ request.GET.search|default:'' }}">
+      <label class="form-label" for="search">{% trans "Search" %}</label>
+      <input id="search" name="search" class="form-control" placeholder="{% trans 'Name or description' %}" value="{{ request.GET.search|default:'' }}">
     </div>
     <div class="col-12 col-md-6 col-lg-3">
-      <label class="form-label" for="category">{% trans "Categoría" %}</label>
+      <label class="form-label" for="category">{% trans "Category" %}</label>
       <select id="category" name="category" class="form-select">
-        <option value="">{% trans "Todas" %}</option>
+        <option value="">{% trans "All" %}</option>
         {% for cat in categories %}
           <option value="{{ cat.slug }}" {% if request.GET.category == cat.slug %}selected{% endif %}>{{ cat.name }}</option>
         {% endfor %}
       </select>
     </div>
     <div class="col-12 col-sm-6 col-lg-2">
-      <label class="form-label" for="min_price">{% trans "Precio mín." %}</label>
+      <label class="form-label" for="min_price">{% trans "Min price" %}</label>
       <input id="min_price" name="min_price" type="number" step="0.01" class="form-control" value="{{ request.GET.min_price|default:'' }}">
     </div>
     <div class="col-12 col-sm-6 col-lg-2">
-      <label class="form-label" for="max_price">{% trans "Precio máx." %}</label>
+      <label class="form-label" for="max_price">{% trans "Max price" %}</label>
       <input id="max_price" name="max_price" type="number" step="0.01" class="form-control" value="{{ request.GET.max_price|default:'' }}">
     </div>
     <div class="col-12 col-lg-1 d-grid">
-      <button class="btn btn-primary">{% trans "Aplicar" %}</button>
+      <button class="btn btn-primary">{% trans "Apply" %}</button>
     </div>
   </form>
 </section>
@@ -39,18 +39,20 @@
   {% for product in products %}
     <div class="col-12 col-sm-6 col-lg-4 col-xl-3 d-flex">
       <article class="card product-card w-100">
-        <img src="{{ product.image_url|default:'https://placehold.co/640x480?text=ElectroMarket' }}" class="product-img product-img--catalog card-img-top" loading="lazy" alt="{{ product.name }}">
+        <div class="product-media">
+          <img src="{{ product.image_url|default:'https://placehold.co/640x480?text=ElectroMarket' }}" class="product-img card-img-top" loading="lazy" alt="{{ product.name }}">
+        </div>
         <div class="card-body d-flex flex-column gap-1">
           <h2 class="h6 mb-0">{{ product.name }}</h2>
           <p class="meta-text mb-2">{{ product.category.name }}</p>
           <p class="price-highlight mb-3">${{ product.price }}</p>
-          <a href="{{ product.get_absolute_url }}" class="btn btn-primary btn-sm mt-auto">{% trans "Ver detalle" %}</a>
+          <a href="{{ product.get_absolute_url }}" class="btn btn-primary btn-sm mt-auto">{% trans "View details" %}</a>
         </div>
       </article>
     </div>
   {% empty %}
     <div class="col-12">
-      <div class="empty-state p-4 text-center">{% trans "No encontramos productos para ese filtro." %}</div>
+      <div class="empty-state p-4 text-center">{% trans "No products found for this filter." %}</div>
     </div>
   {% endfor %}
 </div>
