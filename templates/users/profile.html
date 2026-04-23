@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% block title %}{% trans 'Perfil' %} | ElectroMarket{% endblock %}
+{% block title %}{% trans 'Profile' %} | ElectroMarket{% endblock %}
 {% block content %}
 <div class="row justify-content-center">
   <div class="col-12 col-lg-7">
-    <div class="card profile-card p-3 p-md-4">
-      <p class="profile-card__kicker mb-2">{% trans "Cuenta" %}</p>
-      <h1 class="h4 mb-3">{% trans "Perfil" %}</h1>
-      <p class="meta-text mb-4">{% trans "Actualizá tu información personal para acelerar futuras compras." %}</p>
+    <div class="card profile-card app-panel p-3 p-md-4">
+      <p class="profile-card__kicker mb-2">{% trans "Account" %}</p>
+      <h1 class="h4 mb-3">{% trans "Profile" %}</h1>
+      <p class="meta-text mb-4">{% trans "Update your personal information to speed up future purchases." %}</p>
       <form method="post" class="d-grid gap-3 profile-form" novalidate>
         {% csrf_token %}
         {% for field in form %}
@@ -19,7 +19,7 @@
             {% endif %}
           </div>
         {% endfor %}
-        <button class="btn btn-primary mt-2">{% trans "Guardar cambios" %}</button>
+        <button class="btn btn-primary mt-2">{% trans "Save changes" %}</button>
       </form>
     </div>
   </div>

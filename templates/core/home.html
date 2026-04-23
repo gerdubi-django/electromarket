@@ -1,33 +1,35 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% block title %}{% trans 'Inicio' %} | ElectroMarket{% endblock %}
+{% block title %}{% trans 'Home' %} | ElectroMarket{% endblock %}
 {% block content %}
 <section class="hero p-4 p-lg-5 mb-4 mb-lg-5">
-  <h1 class="display-6 mb-3">{% trans "Tu tienda de informática profesional" %}</h1>
-  <p class="meta-text mb-4">{% trans "Equipos, periféricos y componentes con disponibilidad real, precios claros y experiencia de compra rápida." %}</p>
-  <a href="{% url 'catalog:product_list' %}" class="btn btn-primary">{% trans "Ver productos" %}</a>
+  <h1 class="display-6 mb-3">{% trans "Your professional computer store" %}</h1>
+  <p class="meta-text mb-4">{% trans "Hardware, peripherals, and components with real stock, transparent prices, and a fast checkout experience." %}</p>
+  <a href="{% url 'catalog:product_list' %}" class="btn btn-primary">{% trans "View products" %}</a>
 </section>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
-  <h2 class="h4 section-title mb-0">{% trans "Destacados" %}</h2>
+  <h2 class="h4 section-title mb-0">{% trans "Featured" %}</h2>
 </div>
 
 <div class="row product-grid">
   {% for product in featured_products %}
     <div class="col-12 col-sm-6 col-lg-3 d-flex">
       <article class="card product-card w-100">
-        <img src="{{ product.image_url|default:'https://placehold.co/640x480?text=ElectroMarket' }}" alt="{{ product.name }}" class="product-img product-img--catalog card-img-top" loading="lazy">
+        <div class="product-media">
+          <img src="{{ product.image_url|default:'https://placehold.co/640x480?text=ElectroMarket' }}" alt="{{ product.name }}" class="product-img card-img-top" loading="lazy">
+        </div>
         <div class="card-body d-flex flex-column gap-1">
           <h3 class="h6 mb-0">{{ product.name }}</h3>
           <p class="meta-text mb-2">{{ product.category.name }}</p>
           <p class="price-highlight mt-auto mb-3">${{ product.price }}</p>
-          <a href="{{ product.get_absolute_url }}" class="btn btn-primary btn-sm">{% trans "Ver detalle" %}</a>
+          <a href="{{ product.get_absolute_url }}" class="btn btn-primary btn-sm">{% trans "View details" %}</a>
         </div>
       </article>
     </div>
   {% empty %}
     <div class="col-12">
-      <div class="empty-state p-4 text-center">{% trans "Todavía no hay productos publicados." %}</div>
+      <div class="empty-state p-4 text-center">{% trans "There are no published products yet." %}</div>
     </div>
   {% endfor %}
 </div>
